@@ -14,7 +14,8 @@ const KPICard = ({ icon, label, value, trend, subtext, color }) => {
       </div>
       <p className="text-[10px] font-bold text-slate-400 uppercase tracking-widest mb-1">{label}</p>
       <h3 className="text-2xl font-extrabold text-slate-900 mb-2">{value}</h3>
-      <p className="text-[10px] font-medium text-slate-500">{subtext}</p>
+      <div className="text-[10px] font-medium text-slate-500">{subtext}</div>
+
     </div>
   );
 };

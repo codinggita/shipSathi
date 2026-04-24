@@ -1,17 +1,42 @@
+@import "tailwindcss";
+@config "../../tailwind.config.js";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --primary-color: #F97316;
-  --bg-color: #F9FAFB;
-  --surface-color: #FFFFFF;
-  --text-main: #1F2937;
+
+@layer base {
+  body {
+    @apply bg-slate-50 text-slate-900 antialiased;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
 }
 
-body {
-  margin: 0;
-  font-family: 'Inter', system-ui, -apple-system, sans-serif;
-  background-color: var(--bg-color);
-  color: var(--text-main);
+@layer components {
+  .glass {
+    @apply bg-white/70 backdrop-blur-md border border-white/20;
+  }
+  
+  .btn-primary {
+    @apply bg-brand text-white px-6 py-3 rounded-xl font-semibold transition-all hover:bg-brand-dark hover:shadow-lg active:scale-95;
+  }
+  
+  .btn-secondary {
+    @apply bg-white text-brand border-2 border-brand/20 px-6 py-3 rounded-xl font-semibold transition-all hover:bg-brand/5 active:scale-95;
+  }
+
+  .nav-link {
+    @apply text-slate-600 hover:text-brand font-medium transition-colors text-sm;
+  }
 }
+
+.gradient-text {
+  @apply bg-clip-text text-transparent bg-gradient-to-r from-brand to-primary-500;
+}
+
+.hero-gradient {
+  background: radial-gradient(circle at top right, rgba(79, 70, 229, 0.05), transparent),
+              radial-gradient(circle at bottom left, rgba(139, 92, 246, 0.05), transparent);
+}
+

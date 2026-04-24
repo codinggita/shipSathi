@@ -63,6 +63,23 @@ Currently, businesses rely on multiple courier partners (typically 5–10 provid
 
 ---
 
+## 🎨 Design Aesthetics
+
+The platform follows a modern, clean, and professional design language optimized for efficiency and readability.
+
+- **Color Palette:**
+  - **Primary:** Vibrant Orange (`#F97316`) for primary actions and active states.
+  - **Background:** Soft Off-White/Light Gray (`#F9FAFB`) for a clean look.
+  - **Surfaces:** Pure White (`#FFFFFF`) cards with subtle elevation shadows.
+  - **Typography:** Dark Charcoal (`#1F2937`) for high contrast and readability.
+- **Typography:** Modern Sans-serif (Inter/Poppins family) with a clear hierarchy.
+- **UI Style:**
+  - **Card-Based Interface:** Information is segmented into rounded, elevated cards.
+  - **Dashboard Layout:** Sidebar-based navigation for seamless multi-tasking.
+  - **Checklist-Ready:** Clean input fields and prominent Call-to-Action (CTA) buttons.
+
+---
+
 ## 📂 Frontend Folder Structure
 
 ```text

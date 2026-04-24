@@ -1,12 +1,16 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Zap, Brain, LayoutGrid, BarChart3, Calculator } from 'lucide-react';
+
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import DashboardPreview from '../components/DashboardPreview';
 
 const Landing = () => {
+  const navigate = useNavigate();
   const fadeInUp = {
+
     initial: { opacity: 0, y: 20 },
     animate: { opacity: 1, y: 0 },
     transition: { duration: 0.6 }
@@ -44,11 +48,15 @@ const Landing = () => {
               </p>
               
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <button className="btn-primary flex items-center justify-center gap-2">
+                <button 
+                  onClick={() => navigate('/dashboard')}
+                  className="btn-primary flex items-center justify-center gap-2"
+                >
                   Get Started Free <ArrowRight className="h-4 w-4" />
                 </button>
                 <button className="btn-secondary">View Demo</button>
               </div>
+
 
               {/* Social Proof */}
               <div className="flex items-center gap-4">

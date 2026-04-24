@@ -1,6 +1,4 @@
-import React from 'react';
-import { useNavigate } from 'react-router-dom';
-
+import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, Users, Truck, FileText, 
   Settings, BarChart2, Package, HelpCircle, LogOut 
@@ -8,14 +6,16 @@ import {
 
 const Sidebar = ({ isOpen, onClose }) => {
   const navigate = useNavigate();
+  const location = useLocation();
+
   const navItems = [
-    { icon: <LayoutDashboard className="h-5 w-5" />, label: 'Dashboard', active: true },
-    { icon: <Users className="h-5 w-5" />, label: 'Users' },
-    { icon: <Truck className="h-5 w-5" />, label: 'Couriers' },
-    { icon: <FileText className="h-5 w-5" />, label: 'Pricing Rules' },
-    { icon: <Package className="h-5 w-5" />, label: 'Order Management' },
-    { icon: <BarChart2 className="h-5 w-5" />, label: 'Analytics' },
-    { icon: <Settings className="h-5 w-5" />, label: 'Settings' },
+    { icon: <LayoutDashboard className="h-5 w-5" />, label: 'Dashboard', path: '/dashboard' },
+    { icon: <Users className="h-5 w-5" />, label: 'Users', path: '/users' },
+    { icon: <Truck className="h-5 w-5" />, label: 'Couriers', path: '/couriers' },
+    { icon: <FileText className="h-5 w-5" />, label: 'Pricing Rules', path: '/pricing' },
+    { icon: <Package className="h-5 w-5" />, label: 'Order Management', path: '/orders' },
+    { icon: <BarChart2 className="h-5 w-5" />, label: 'Analytics', path: '/analytics' },
+    { icon: <Settings className="h-5 w-5" />, label: 'Settings', path: '/settings' },
   ];
 
   return (
@@ -34,7 +34,7 @@ const Sidebar = ({ isOpen, onClose }) => {
         {/* Logo */}
         <div className="flex items-center justify-between px-2 mb-10">
           <div 
-            onClick={() => navigate('/')}
+            onClick={() => { navigate('/'); onClose?.(); }}
             className="flex items-center gap-2 cursor-pointer group"
           >
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-white font-bold group-hover:bg-brand-dark transition-colors">S</div>
@@ -47,24 +47,28 @@ const Sidebar = ({ isOpen, onClose }) => {
             <LogOut className="h-5 w-5 rotate-180" />
           </button>
         </div>
-
         
-        {/* Nav Items - Same as before */}
+        {/* Nav Items */}
         <nav className="flex-1 space-y-1">
-          {navItems.map((item, idx) => (
-            <button 
-              key={idx}
-              className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
-                item.active 
-                ? 'bg-brand/5 text-brand shadow-sm' 
-                : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
-              }`}
-            >
-              {item.icon}
-              {item.label}
-            </button>
-          ))}
+          {navItems.map((item, idx) => {
+            const isActive = location.pathname === item.path;
+            return (
+              <button 
+                key={idx}
+                onClick={() => { navigate(item.path); onClose?.(); }}
+                className={`w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium transition-all ${
+                  isActive 
+                  ? 'bg-brand/5 text-brand shadow-sm font-bold' 
+                  : 'text-slate-500 hover:bg-slate-50 hover:text-slate-900'
+                }`}
+              >
+                {item.icon}
+                {item.label}
+              </button>
+            );
+          })}
         </nav>
+
 
         {/* Bottom Actions - Same as before */}
         <div className="pt-6 border-t border-slate-100 space-y-1">

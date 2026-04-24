@@ -1,9 +1,9 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Check, ArrowRight, Zap, Brain, LayoutGrid, BarChart3, Calculator } from 'lucide-react';
-import Navbar from '../../components/layout/Navbar';
-import Footer from '../../components/layout/Footer';
-import DashboardPreview from '../../components/features/DashboardPreview';
+import Navbar from '../components/Navbar';
+import Footer from '../components/Footer';
+import DashboardPreview from '../components/DashboardPreview';
 
 const Landing = () => {
   const fadeInUp = {

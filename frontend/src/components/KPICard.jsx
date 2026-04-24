@@ -2,7 +2,8 @@ import React from 'react';
 
 const KPICard = ({ icon, label, value, trend, subtext, color }) => {
   return (
-    <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-premium transition-all">
+    <div className="bg-white p-4 lg:p-6 rounded-2xl border border-slate-200 shadow-sm hover:shadow-premium transition-all">
+
       <div className="flex items-start justify-between mb-4">
         <div className={`p-3 rounded-xl ${color}`}>
           {icon}

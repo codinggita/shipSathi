@@ -12,14 +12,15 @@ const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   return (
-    <div className="min-h-screen bg-slate-50 flex">
+    <div className="min-h-screen bg-slate-50 flex overflow-hidden">
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       
-      <div className="flex-1 lg:ml-64 flex flex-col transition-all">
+      <div className="flex-1 lg:ml-64 flex flex-col min-w-0 transition-all max-w-full">
         <DashboardHeader onMenuClick={() => setIsSidebarOpen(true)} />
         
         {/* Dashboard Content */}
-        <main className="mt-20 p-4 lg:p-8">
+        <main className="mt-20 p-4 lg:p-8 overflow-y-auto overflow-x-hidden">
+
           
           <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div>
@@ -94,18 +95,21 @@ const Dashboard = () => {
               </div>
               
               {/* Simple Mock Bar Chart */}
-              <div className="h-64 flex items-end justify-between gap-4 mask-fade-top border-b border-slate-100 pb-2">
-                {['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].map((day, idx) => (
-                  <div key={day} className="flex-1 flex flex-col items-center group">
-                    <div 
-                      className={`w-full max-w-[40px] rounded-t-lg transition-all ${idx === 3 ? 'bg-brand shadow-lg cursor-default' : 'bg-slate-100 group-hover:bg-slate-200'}`}
-                      style={{ height: `${[40, 55, 45, 85, 60, 40, 50][idx]}%` }}
-                    ></div>
-                    <span className={`text-[10px] font-bold mt-3 ${idx === 3 ? 'text-brand' : 'text-slate-400'}`}>{day}</span>
-                  </div>
-                ))}
+              <div className="overflow-x-auto pb-4">
+                <div className="h-64 min-w-[400px] flex items-end justify-between gap-4 mask-fade-top border-b border-slate-100 pb-2">
+                  {['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].map((day, idx) => (
+                    <div key={day} className="flex-1 flex flex-col items-center group">
+                      <div 
+                        className={`w-full max-w-[40px] rounded-t-lg transition-all ${idx === 3 ? 'bg-brand shadow-lg cursor-default' : 'bg-slate-100 group-hover:bg-slate-200'}`}
+                        style={{ height: `${[40, 55, 45, 85, 60, 40, 50][idx]}%` }}
+                      ></div>
+                      <span className={`text-[10px] font-bold mt-3 ${idx === 3 ? 'text-brand' : 'text-slate-400'}`}>{day}</span>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
+
 
             {/* Platform Alerts */}
             <div className="bg-white p-8 rounded-2xl border border-slate-200">
@@ -161,30 +165,32 @@ const Dashboard = () => {
             </div>
             
             {/* Wave SVG Chart */}
-            <div className="h-48 w-full relative">
-              <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
-                <path 
-                  d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150" 
-                  fill="none" 
-                  stroke="#4F46E5" 
-                  strokeWidth="4" 
-                  strokeLinecap="round"
-                />
-                <path 
-                  d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150 L1000,200 L0,200 Z" 
-                  fill="url(#grad1)" 
-                  opacity="0.1"
-                />
-                <defs>
-                  <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                    <stop offset="0%" style={{stopColor:'#4F46E5', stopOpacity:0.5}} />
-                    <stop offset="100%" style={{stopColor:'#4F46E5', stopOpacity:0}} />
-                  </linearGradient>
-                </defs>
-              </svg>
-              <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                <div className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded shadow-xl">
-                  MAY 25: $42,105.00
+            <div className="overflow-x-auto pb-4">
+              <div className="h-48 min-w-[600px] w-full relative">
+                <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
+                  <path 
+                    d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150" 
+                    fill="none" 
+                    stroke="#4F46E5" 
+                    strokeWidth="4" 
+                    strokeLinecap="round"
+                  />
+                  <path 
+                    d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150 L1000,200 L0,200 Z" 
+                    fill="url(#grad1)" 
+                    opacity="0.1"
+                  />
+                  <defs>
+                    <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" style={{stopColor:'#4F46E5', stopOpacity:0.5}} />
+                      <stop offset="100%" style={{stopColor:'#4F46E5', stopOpacity:0}} />
+                    </linearGradient>
+                  </defs>
+                </svg>
+                <div className="absolute inset-0 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
+                  <div className="bg-slate-900 text-white text-[10px] font-bold px-3 py-1.5 rounded shadow-xl">
+                    MAY 25: $42,105.00
+                  </div>
                 </div>
               </div>
             </div>
@@ -193,6 +199,7 @@ const Dashboard = () => {
                 <span key={label} className="text-[10px] font-bold text-slate-400">{label}</span>
               ))}
             </div>
+
           </div>
 
           {/* Recent Shipments */}

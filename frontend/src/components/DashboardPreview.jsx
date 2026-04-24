@@ -8,8 +8,9 @@ const DashboardPreview = () => {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      className="relative w-full max-w-[580px] rounded-2xl border border-slate-200 bg-white p-4 shadow-premium lg:p-6 hero-gradient"
+      className="relative w-full max-w-lg lg:max-w-[580px] rounded-2xl border border-slate-200 bg-white p-4 shadow-premium lg:p-6 hero-gradient overflow-hidden"
     >
+
       {/* Window Header */}
       <div className="flex items-center justify-between mb-6">
         <div className="flex gap-1.5">

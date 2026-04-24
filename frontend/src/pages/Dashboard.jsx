@@ -9,32 +9,36 @@ import DashboardHeader from '../components/DashboardHeader';
 import KPICard from '../components/KPICard';
 
 const Dashboard = () => {
+  const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
+
   return (
     <div className="min-h-screen bg-slate-50 flex">
-      <Sidebar />
+      <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
       
-      <div className="flex-1 ml-64 flex flex-col">
-        <DashboardHeader />
+      <div className="flex-1 lg:ml-64 flex flex-col transition-all">
+        <DashboardHeader onMenuClick={() => setIsSidebarOpen(true)} />
         
         {/* Dashboard Content */}
-        <main className="mt-20 p-8">
+        <main className="mt-20 p-4 lg:p-8">
           
-          <header className="flex items-center justify-between mb-8">
+          <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div>
-              <h1 className="text-3xl font-extrabold text-slate-900">Platform Overview</h1>
-              <p className="text-sm text-slate-500 font-medium mt-1">Live operational data for ShipSathi Global Network</p>
+              <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900">Platform Overview</h1>
+              <p className="text-xs lg:text-sm text-slate-500 font-medium mt-1">Live operational data for ShipSathi Global Network</p>
             </div>
-            <div className="flex items-center gap-3">
-              <button className="flex items-center gap-2 bg-white border border-slate-200 px-4 py-2 rounded-xl text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">
+            <div className="flex items-center gap-2 lg:gap-3">
+              <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-white border border-slate-200 px-3 lg:px-4 py-2 rounded-xl text-xs lg:text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">
                 <Calendar className="h-4 w-4" />
-                Last 24 Hours
+                <span className="hidden xs:inline">Last 24 Hours</span>
+                <span className="xs:hidden">24h</span>
               </button>
-              <button className="flex items-center gap-2 bg-brand px-6 py-2 rounded-xl text-sm font-bold text-white hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all">
+              <button className="flex-1 sm:flex-none flex items-center justify-center gap-2 bg-brand px-4 lg:px-6 py-2 rounded-xl text-xs lg:text-sm font-bold text-white hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all">
                 <Download className="h-4 w-4" />
-                Export Report
+                Export
               </button>
             </div>
           </header>
+
 
           {/* Metrics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

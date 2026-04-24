@@ -1,10 +1,13 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+
 import { 
   LayoutDashboard, Users, Truck, FileText, 
   Settings, BarChart2, Package, HelpCircle, LogOut 
 } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {
+  const navigate = useNavigate();
   const navItems = [
     { icon: <LayoutDashboard className="h-5 w-5" />, label: 'Dashboard', active: true },
     { icon: <Users className="h-5 w-5" />, label: 'Users' },
@@ -30,10 +33,13 @@ const Sidebar = ({ isOpen, onClose }) => {
       }`}>
         {/* Logo */}
         <div className="flex items-center justify-between px-2 mb-10">
-          <div className="flex items-center gap-2">
-            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-white font-bold">S</div>
+          <div 
+            onClick={() => navigate('/')}
+            className="flex items-center gap-2 cursor-pointer group"
+          >
+            <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-white font-bold group-hover:bg-brand-dark transition-colors">S</div>
             <div className="flex flex-col leading-tight">
-              <span className="text-lg font-bold text-brand">ShipSathi</span>
+              <span className="text-lg font-bold text-brand group-hover:text-brand-dark transition-colors">ShipSathi</span>
               <span className="text-[10px] font-medium text-slate-400">Admin Console</span>
             </div>
           </div>
@@ -41,6 +47,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             <LogOut className="h-5 w-5 rotate-180" />
           </button>
         </div>
+
         
         {/* Nav Items - Same as before */}
         <nav className="flex-1 space-y-1">

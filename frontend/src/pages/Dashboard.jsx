@@ -1,8 +1,8 @@
 import React from 'react';
 import { motion } from 'framer-motion';
-import { 
-  Users, Package, DollarSign, Activity, Calendar, 
-  Download, AlertCircle, TrendingUp, Info, ChevronDown 
+import {
+  Users, Package, DollarSign, Activity, Calendar,
+  Download, AlertCircle, TrendingUp, Info, ChevronDown
 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import DashboardHeader from '../components/DashboardHeader';
@@ -14,14 +14,14 @@ const Dashboard = () => {
   return (
     <div className="min-h-screen bg-slate-50 flex overflow-hidden">
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
-      
+
       <div className="flex-1 lg:ml-64 flex flex-col min-w-0 transition-all max-w-full">
         <DashboardHeader onMenuClick={() => setIsSidebarOpen(true)} />
-        
+
         {/* Dashboard Content */}
         <main className="mt-20 p-4 lg:p-8 overflow-y-auto overflow-x-hidden">
 
-          
+
           <header className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
             <div>
               <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900">Platform Overview</h1>
@@ -43,35 +43,35 @@ const Dashboard = () => {
 
           {/* Metrics Grid */}
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
-            <KPICard 
-              icon={<Users className="h-5 w-5" />} 
-              label="Total Users" 
-              value="42,892" 
-              trend="+12%" 
+            <KPICard
+              icon={<Users className="h-5 w-5" />}
+              label="Total Users"
+              value="42,892"
+              trend="+12%"
               subtext={<><span className="text-brand font-bold">1,204</span> new this week</>}
               color="bg-indigo-50 text-indigo-600"
             />
-            <KPICard 
-              icon={<Package className="h-5 w-5" />} 
-              label="Today's Shipments" 
-              value="8,431" 
-              trend="+8.4%" 
+            <KPICard
+              icon={<Package className="h-5 w-5" />}
+              label="Today's Shipments"
+              value="8,431"
+              trend="+8.4%"
               subtext={<><span className="text-brand font-bold">152,042</span> month-to-date</>}
               color="bg-blue-50 text-blue-600"
             />
-            <KPICard 
-              icon={<DollarSign className="h-5 w-5" />} 
-              label="Gross Revenue" 
-              value="$2.48M" 
-              trend="+14.2%" 
+            <KPICard
+              icon={<DollarSign className="h-5 w-5" />}
+              label="Gross Revenue"
+              value="$2.48M"
+              trend="+14.2%"
               subtext={<><span className="text-brand font-bold">$14.2k</span> avg. daily</>}
               color="bg-emerald-50 text-emerald-600"
             />
-            <KPICard 
-              icon={<Activity className="h-5 w-5" />} 
-              label="Active Couriers" 
-              value="1,105" 
-              trend="Stable" 
+            <KPICard
+              icon={<Activity className="h-5 w-5" />}
+              label="Active Couriers"
+              value="1,105"
+              trend="Stable"
               subtext={
                 <div className="w-full h-1 bg-slate-100 rounded-full mt-2 overflow-hidden">
                   <div className="h-full w-2/3 bg-brand rounded-full"></div>
@@ -93,13 +93,13 @@ const Dashboard = () => {
                   Last 7 Days <ChevronDown className="h-3 w-3" />
                 </button>
               </div>
-              
+
               {/* Simple Mock Bar Chart */}
               <div className="overflow-x-auto pb-4">
                 <div className="h-64 min-w-[400px] flex items-end justify-between gap-4 mask-fade-top border-b border-slate-100 pb-2">
                   {['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN'].map((day, idx) => (
                     <div key={day} className="flex-1 flex flex-col items-center group">
-                      <div 
+                      <div
                         className={`w-full max-w-[40px] rounded-t-lg transition-all ${idx === 3 ? 'bg-brand shadow-lg cursor-default' : 'bg-slate-100 group-hover:bg-slate-200'}`}
                         style={{ height: `${[40, 55, 45, 85, 60, 40, 50][idx]}%` }}
                       ></div>
@@ -117,28 +117,28 @@ const Dashboard = () => {
                 <AlertCircle className="h-5 w-5 text-red-500" />
                 <h3 className="font-bold text-slate-900">Platform Alerts</h3>
               </div>
-              
+
               <div className="space-y-4">
-                <AlertItem 
-                  type="danger" 
-                  title="Carrier API Downtime" 
+                <AlertItem
+                  type="danger"
+                  title="Carrier API Downtime"
                   desc="FedEx tracking endpoints are currently unresponsive. Sync delayed."
                   time="12 minutes ago"
                 />
-                <AlertItem 
-                  type="warning" 
-                  title="High RTO Spike" 
+                <AlertItem
+                  type="warning"
+                  title="High RTO Spike"
                   desc="Return to Origin rates for Region-West-4 exceeded 15% today."
                   time="2 hours ago"
                 />
-                <AlertItem 
-                  type="info" 
-                  title="Scheduled Maintenance" 
+                <AlertItem
+                  type="info"
+                  title="Scheduled Maintenance"
                   desc="Database optimization scheduled for Sunday, 02:00 AM UTC."
                   time="5 hours ago"
                 />
               </div>
-              
+
               <button className="w-full text-center text-xs font-bold text-brand mt-8 hover:underline">
                 View All Alerts
               </button>
@@ -163,27 +163,27 @@ const Dashboard = () => {
                 </div>
               </div>
             </div>
-            
+
             {/* Wave SVG Chart */}
             <div className="overflow-x-auto pb-4">
               <div className="h-48 min-w-[600px] w-full relative">
                 <svg className="w-full h-full" viewBox="0 0 1000 200" preserveAspectRatio="none">
-                  <path 
-                    d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150" 
-                    fill="none" 
-                    stroke="#4F46E5" 
-                    strokeWidth="4" 
+                  <path
+                    d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150"
+                    fill="none"
+                    stroke="#4F46E5"
+                    strokeWidth="4"
                     strokeLinecap="round"
                   />
-                  <path 
-                    d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150 L1000,200 L0,200 Z" 
-                    fill="url(#grad1)" 
+                  <path
+                    d="M0,150 C100,150 150,110 250,110 C350,110 400,150 500,150 C600,150 650,80 750,80 C850,80 900,150 1000,150 L1000,200 L0,200 Z"
+                    fill="url(#grad1)"
                     opacity="0.1"
                   />
                   <defs>
                     <linearGradient id="grad1" x1="0%" y1="0%" x2="0%" y2="100%">
-                      <stop offset="0%" style={{stopColor:'#4F46E5', stopOpacity:0.5}} />
-                      <stop offset="100%" style={{stopColor:'#4F46E5', stopOpacity:0}} />
+                      <stop offset="0%" style={{ stopColor: '#4F46E5', stopOpacity: 0.5 }} />
+                      <stop offset="100%" style={{ stopColor: '#4F46E5', stopOpacity: 0 }} />
                     </linearGradient>
                   </defs>
                 </svg>
@@ -261,10 +261,9 @@ const TableRow = ({ id, logo, courier, region, units, status, revenue }) => (
     <td className="px-8 py-4 text-xs font-medium text-slate-500">{region}</td>
     <td className="px-8 py-4 text-xs font-medium text-slate-700">{units}</td>
     <td className="px-8 py-4">
-      <span className={`px-3 py-1 rounded-full text-[9px] font-bold ${
-        status === 'In Transit' ? 'bg-green-100 text-green-700' : 
-        status === 'Sorted' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'
-      }`}>
+      <span className={`px-3 py-1 rounded-full text-[9px] font-bold ${status === 'In Transit' ? 'bg-green-100 text-green-700' :
+          status === 'Sorted' ? 'bg-blue-100 text-blue-700' : 'bg-slate-100 text-slate-600'
+        }`}>
         {status}
       </span>
     </td>

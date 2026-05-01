@@ -10,6 +10,7 @@ import Orders from './pages/Orders';
 import Analytics from './pages/Analytics';
 import EnterpriseDashboard from './pages/EnterpriseDashboard';
 import BulkOrders from './pages/BulkOrders';
+import CourierPerformance from './pages/CourierPerformance';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/enterprise" element={<EnterpriseDashboard />} />
           <Route path="/bulk-orders" element={<BulkOrders />} />
+          <Route path="/courier-performance" element={<CourierPerformance />} />
         </Routes>
       </div>
     </Router>

@@ -9,6 +9,7 @@ import Settings from './pages/Settings';
 import Orders from './pages/Orders';
 import Analytics from './pages/Analytics';
 import EnterpriseDashboard from './pages/EnterpriseDashboard';
+import BulkOrders from './pages/BulkOrders';
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           <Route path="/orders" element={<Orders />} />
           <Route path="/analytics" element={<Analytics />} />
           <Route path="/enterprise" element={<EnterpriseDashboard />} />
+          <Route path="/bulk-orders" element={<BulkOrders />} />
         </Routes>
       </div>
     </Router>

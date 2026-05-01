@@ -6,6 +6,7 @@ import Users from './pages/Users';
 import Couriers from './pages/Couriers';
 import Pricing from './pages/Pricing';
 import Settings from './pages/Settings';
+import Orders from './pages/Orders';
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
           <Route path="/couriers" element={<Couriers />} />
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/orders" element={<Orders />} />
         </Routes>
       </div>
     </Router>

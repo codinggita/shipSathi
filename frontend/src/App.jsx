@@ -7,6 +7,7 @@ import Couriers from './pages/Couriers';
 import Pricing from './pages/Pricing';
 import Settings from './pages/Settings';
 import Orders from './pages/Orders';
+import Analytics from './pages/Analytics';
 
 function App() {
   return (
@@ -20,6 +21,7 @@ function App() {
           <Route path="/pricing" element={<Pricing />} />
           <Route path="/settings" element={<Settings />} />
           <Route path="/orders" element={<Orders />} />
+          <Route path="/analytics" element={<Analytics />} />
         </Routes>
       </div>
     </Router>

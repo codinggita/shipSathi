@@ -13,6 +13,7 @@ import BulkOrders from './pages/BulkOrders';
 import CourierPerformance from './pages/CourierPerformance';
 import CreateShipment from './pages/CreateShipment';
 import RateComparison from './pages/RateComparison';
+import EnterpriseAnalytics from './pages/EnterpriseAnalytics';
 
 function App() {
   return (
@@ -32,6 +33,7 @@ function App() {
           <Route path="/courier-performance" element={<CourierPerformance />} />
           <Route path="/create-shipment" element={<CreateShipment />} />
           <Route path="/rate-comparison" element={<RateComparison />} />
+          <Route path="/enterprise-analytics" element={<EnterpriseAnalytics />} />
         </Routes>
       </div>
     </Router>

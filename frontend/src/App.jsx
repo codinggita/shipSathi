@@ -14,6 +14,10 @@ import CourierPerformance from './pages/CourierPerformance';
 import CreateShipment from './pages/CreateShipment';
 import RateComparison from './pages/RateComparison';
 import EnterpriseAnalytics from './pages/EnterpriseAnalytics';
+import EnterpriseSettings from './pages/EnterpriseSettings';
+import Login from './pages/Login';
+import Signup from './pages/Signup';
+import ForgotPassword from './pages/ForgotPassword';
 
 function App() {
   return (
@@ -34,6 +38,10 @@ function App() {
           <Route path="/create-shipment" element={<CreateShipment />} />
           <Route path="/rate-comparison" element={<RateComparison />} />
           <Route path="/enterprise-analytics" element={<EnterpriseAnalytics />} />
+          <Route path="/enterprise-settings" element={<EnterpriseSettings />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/forgot-password" element={<ForgotPassword />} />
         </Routes>
       </div>
     </Router>

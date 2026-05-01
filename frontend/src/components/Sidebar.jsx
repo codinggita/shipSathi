@@ -1,7 +1,7 @@
 import { useNavigate, useLocation } from 'react-router-dom';
 import { 
   LayoutDashboard, Users, Truck, FileText, 
-  Settings, BarChart2, Package, HelpCircle, LogOut 
+  Settings, BarChart2, Package, HelpCircle, LogOut, Layers
 } from 'lucide-react';
 
 const Sidebar = ({ isOpen, onClose }) => {

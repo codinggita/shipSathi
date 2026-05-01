@@ -1,5 +1,6 @@
 import React from 'react';
 import { Search, Bell, HelpCircle, User, ChevronDown } from 'lucide-react';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   return (
@@ -13,11 +14,11 @@ const Navbar = () => {
           </div>
           
           <div className="hidden lg:flex items-center gap-6">
-            <div className="flex items-center gap-1 nav-link cursor-pointer">
+            <Link to="/" className="flex items-center gap-1 nav-link cursor-pointer hover:text-brand transition-colors">
               Solutions <ChevronDown className="h-4 w-4" />
-            </div>
+            </Link>
             <a href="#pricing" className="nav-link">Pricing</a>
-            <a href="#enterprise" className="nav-link">Enterprise</a>
+            <Link to="/enterprise" className="nav-link cursor-pointer hover:text-brand transition-colors">Enterprise</Link>
           </div>
         </div>
 

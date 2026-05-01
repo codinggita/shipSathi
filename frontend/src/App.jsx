@@ -8,6 +8,7 @@ import Pricing from './pages/Pricing';
 import Settings from './pages/Settings';
 import Orders from './pages/Orders';
 import Analytics from './pages/Analytics';
+import EnterpriseDashboard from './pages/EnterpriseDashboard';
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Route path="/settings" element={<Settings />} />
           <Route path="/orders" element={<Orders />} />
           <Route path="/analytics" element={<Analytics />} />
+          <Route path="/enterprise" element={<EnterpriseDashboard />} />
         </Routes>
       </div>
     </Router>

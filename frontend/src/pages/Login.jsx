@@ -8,18 +8,52 @@ const Login = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [rememberMe, setRememberMe] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!email || !password) {
       alert('Please enter your email and password');
       return;
     }
-    // Successfully navigate to dashboard or enterprise
-    if (email.toLowerCase().includes('enterprise')) {
-      navigate('/enterprise');
-    } else {
-      navigate('/dashboard');
+
+    setIsLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Login failed.');
+      }
+
+      // Save to localStorage as per checklist 17
+      if (rememberMe) {
+        localStorage.setItem('authToken', data.token);
+        localStorage.setItem('userProfile', JSON.stringify(data.user));
+      } else {
+        sessionStorage.setItem('authToken', data.token);
+        sessionStorage.setItem('userProfile', JSON.stringify(data.user));
+      }
+
+      alert('Logged in successfully!');
+      
+      // Successfully navigate to dashboard or enterprise
+      if (email.toLowerCase().includes('enterprise') || email.toLowerCase().includes('admin')) {
+        navigate('/enterprise');
+      } else {
+        navigate('/dashboard');
+      }
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -129,9 +163,10 @@ const Login = () => {
 
           <button 
             type="submit"
-            className="w-full bg-brand hover:bg-brand-dark text-white font-extrabold text-sm py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-brand/10 transition-all uppercase tracking-wide cursor-pointer select-none active:scale-95"
+            disabled={isLoading}
+            className="w-full bg-brand hover:bg-brand-dark disabled:opacity-75 text-white font-extrabold text-sm py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-brand/10 transition-all uppercase tracking-wide cursor-pointer select-none active:scale-95"
           >
-            Sign In <ArrowRight className="h-4 w-4" />
+            {isLoading ? 'Signing In...' : 'Sign In'} <ArrowRight className="h-4 w-4" />
           </button>
         </form>
 

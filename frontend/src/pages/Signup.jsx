@@ -9,8 +9,9 @@ const Signup = () => {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [termsAccepted, setTermsAccepted] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     if (!fullName || !email || !password) {
       alert('Please fill in all your details.');
@@ -20,8 +21,30 @@ const Signup = () => {
       alert('You must accept the terms and conditions.');
       return;
     }
-    alert('Account created successfully!');
-    navigate('/login');
+
+    setIsLoading(true);
+    try {
+      const response = await fetch('http://localhost:5000/api/auth/register', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ fullName, email, password })
+      });
+
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Registration failed.');
+      }
+
+      alert('Account created successfully! Please log in.');
+      navigate('/login');
+    } catch (error) {
+      alert(error.message);
+    } finally {
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -137,9 +160,10 @@ const Signup = () => {
 
           <button 
             type="submit"
-            className="w-full bg-brand hover:bg-brand-dark text-white font-extrabold text-sm py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-brand/10 transition-all uppercase tracking-wide cursor-pointer select-none active:scale-95 mt-1"
+            disabled={isLoading}
+            className="w-full bg-brand hover:bg-brand-dark disabled:opacity-75 text-white font-extrabold text-sm py-3.5 rounded-xl flex items-center justify-center gap-2 shadow-md shadow-brand/10 transition-all uppercase tracking-wide cursor-pointer select-none active:scale-95 mt-1"
           >
-            Create Account <ArrowRight className="h-4 w-4" />
+            {isLoading ? 'Creating Account...' : 'Create Account'} <ArrowRight className="h-4 w-4" />
           </button>
         </form>
 

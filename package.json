@@ -1,0 +1,11 @@
+{
+  "name": "shipsathi",
+  "version": "1.0.0",
+  "description": "Root workspace for ShipSathi Logistics platform",
+  "private": true,
+  "scripts": {
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "npm start --prefix backend",
+    "dev": "npx concurrently \"npm run dev --prefix frontend\" \"npm start --prefix backend\""
+  }
+}

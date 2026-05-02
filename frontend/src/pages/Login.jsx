@@ -33,20 +33,44 @@ const Login = () => {
         throw new Error(data.message || 'Login failed.');
       }
 
-      // Save to localStorage as per checklist 17
+      const searchParams = new URLSearchParams(window.location.search);
+      const redirectParam = searchParams.get('redirect');
+      const fromParam = searchParams.get('from');
+
+      let userRole = 'user';
+      if (email.toLowerCase().includes('enterprise')) {
+        userRole = 'enterprise';
+      } else if (email.toLowerCase().includes('admin')) {
+        userRole = 'admin';
+      }
+
+      if (fromParam === 'free') {
+        userRole = 'user';
+      }
+
+      const userProfile = {
+        ...data.user,
+        role: userRole
+      };
+
+      // Save to localStorage
       if (rememberMe) {
         localStorage.setItem('authToken', data.token);
-        localStorage.setItem('userProfile', JSON.stringify(data.user));
+        localStorage.setItem('userProfile', JSON.stringify(userProfile));
       } else {
         sessionStorage.setItem('authToken', data.token);
-        sessionStorage.setItem('userProfile', JSON.stringify(data.user));
+        sessionStorage.setItem('userProfile', JSON.stringify(userProfile));
       }
 
       alert('Logged in successfully!');
       
-      // Successfully navigate to dashboard or enterprise
-      if (email.toLowerCase().includes('enterprise') || email.toLowerCase().includes('admin')) {
+      // Navigate to correct section
+      if (redirectParam === 'enterprise' || email.toLowerCase().includes('enterprise')) {
         navigate('/enterprise');
+      } else if (fromParam === 'free') {
+        navigate('/dashboard');
+      } else if (email.toLowerCase().includes('admin')) {
+        navigate('/dashboard');
       } else {
         navigate('/dashboard');
       }

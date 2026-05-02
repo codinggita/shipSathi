@@ -1,9 +1,15 @@
 # ShipSathi - Courier Rate Aggregator & Shipping Intelligence Platform
 
-**Design Link:** [Figma Design](https://www.figma.com/design/V4dFQRdvATMqSQMHiPK6qd/Untitled?node-id=305-8&t=PQorFTSV0mRWlbkF-1)
+## 🔗 Important Links
+* **Figma Link:** [Figma Design](https://www.figma.com/design/V4dFQRdvATMqSQMHiPK6qd/Untitled?node-id=305-8&t=PQorFTSV0mRWlbkF-1)
+* **Live Deployed Project Link:** [https://ship-sathi-scct.vercel.app/](https://ship-sathi-scct.vercel.app/)
+* **Postman Documentation Link:** [Add your Postman docs link here]
+* **Backend Deployed Link:** [https://shipsathi-db42.onrender.com/](https://shipsathi-db42.onrender.com/)
+* **YouTube Demo Link:** [Add your YouTube video link here]
+
+---
 
 ## 🚀 Problem Statement
-
 E-commerce sellers, D2C brands, and small-to-medium logistics teams face significant inefficiencies in selecting the most cost-effective and reliable courier service for each shipment.
 
 Currently, businesses rely on multiple courier partners (typically 5–10 providers such as Delhivery, Blue Dart, DTDC, etc.), each offering different pricing structures, delivery timelines, and service quality. However, there is no unified platform that provides real-time, standardized comparison across these courier services.
@@ -17,17 +23,9 @@ Currently, businesses rely on multiple courier partners (typically 5–10 provid
 6. **Poor Scalability:** Manual workflows do not scale with increasing order volumes.
 7. **Limited Data Insights:** Sellers lack visibility into courier performance, cost trends, and optimization opportunities.
 
-### Impact:
-- 30–60 minutes wasted daily per seller.
-- 15–25% higher shipping costs due to poor decisions.
-- Increased delivery delays and customer dissatisfaction.
-- Higher Return-to-Origin (RTO) rates.
-- Reduced operational efficiency and scalability.
-
 ---
 
 ## ✨ Solution
-
 **ShipSathi** is a "Courier Rate Aggregator & Shipping Intelligence Platform" that automates courier selection and provides real-time rate comparison.
 
 ### Core Features:
@@ -48,71 +46,55 @@ Currently, businesses rely on multiple courier partners (typically 5–10 provid
 
 ### Frontend
 - **Framework:** React.js (Vite)
-- **Styling:** Vanilla CSS / Tailwind CSS (Optional based on user choice)
-- **State Management:** Context API / Redux Toolkit
+- **Styling:** Vanilla CSS
+- **State Management:** Context API
 - **Icons:** Lucide React
 - **Animations:** Framer Motion
-- **Data Fetching:** Axios / TanStack Query (React Query)
-- **Charts:** Recharts / Chart.js
 
-### Backend (Proposed)
+### Backend
 - **Runtime:** Node.js
 - **Framework:** Express.js
-- **Database:** MongoDB / PostgreSQL
-- **Authentication:** JSON Web Tokens (JWT)
+- **Database:** MongoDB
+- **Authentication:** JSON Web Tokens (JWT) & Google OAuth 2.0 (Google Identity Services)
 
 ---
 
-## 🎨 Design Aesthetics
-
-The platform follows a modern, clean, and professional design language optimized for efficiency and readability.
-
-- **Color Palette:**
-  - **Primary:** Vibrant Orange (`#F97316`) for primary actions and active states.
-  - **Background:** Soft Off-White/Light Gray (`#F9FAFB`) for a clean look.
-  - **Surfaces:** Pure White (`#FFFFFF`) cards with subtle elevation shadows.
-  - **Typography:** Dark Charcoal (`#1F2937`) for high contrast and readability.
-- **Typography:** Modern Sans-serif (Inter/Poppins family) with a clear hierarchy.
-- **UI Style:**
-  - **Card-Based Interface:** Information is segmented into rounded, elevated cards.
-  - **Dashboard Layout:** Sidebar-based navigation for seamless multi-tasking.
-  - **Checklist-Ready:** Clean input fields and prominent Call-to-Action (CTA) buttons.
-
----
-
-## 📂 Frontend Folder Structure
+## 📂 Project Folder Structure
 
 ```text
-ship-sathi-frontend/
-├── public/
-│   ├── assets/           # Static images, logos, vectors
-│   └── favicon.ico
-├── src/
-│   ├── api/              # Axios configurations and API service calls
-│   │   ├── courierApi.js
-│   │   └── analyticsApi.js
-│   ├── components/       # Reusable UI components
-│   │   ├── common/       # Buttons, Modals, Inputs, Cards
-│   │   ├── layout/       # Navbar, Sidebar, Footer, PageWrapper
-│   │   └── features/     # Component logic for specific features (RateTable, WeightCalc)
-│   ├── config/           # App configuration and constants (Environment vars, endpoints)
-│   ├── context/          # React Context providers for global state
-│   ├── hooks/            # Custom hooks for reusable logic (useRates, useAuth)
-│   ├── pages/            # Page-view components
-│   │   ├── Auth/         # Login & Registration
-│   │   ├── Dashboard/    # Main Analytics & Overview
-│   │   ├── RateCompare/  # Live Rate Comparison Tool
-│   │   ├── Shipments/    # Order Management & Tracking
-│   │   └── Settings/     # Rule Engine & Profile
-│   ├── styles/           # Global styles, variables, and design system
-│   ├── utils/            # Helper functions (weight converter, date formatter)
-│   ├── App.jsx           # Main application router and shell
-│   └── main.jsx          # Application entry point
-├── .env                  # Environment configuration
-├── .gitignore
-├── package.json
-└── vite.config.js        # Vite build configuration
+ShipSathi/
+├── backend/
+│   ├── src/
+│   │   ├── config/           # DB configuration
+│   │   ├── controllers/      # Route controllers (Auth, Google Login, Orders)
+│   │   ├── models/           # Mongoose schemas (User, Shipment)
+│   │   ├── routes/           # Express API endpoints
+│   │   └── server.js         # Entry point for backend
+│   ├── .env.example
+│   └── package.json
+├── frontend/
+│   ├── src/
+│   │   ├── api/              # API hooks/functions
+│   │   ├── components/       # Reusable components (MetaSEO, Navbar, Footer, Sidebar)
+│   │   ├── config/           # App constants
+│   │   ├── context/          # State management (AuthContext)
+│   │   ├── pages/            # View components (Landing, Login, Dashboard, etc.)
+│   │   ├── App.jsx           # Main router shell
+│   │   └── main.jsx          # App entry point
+│   ├── public/
+│   │   ├── robots.txt        # Crawler directives
+│   │   └── sitemap.xml       # Search engine map
+│   ├── .env.example
+│   └── package.json
+└── README.md
 ```
+
+---
+
+## 📸 Project Screenshots / Images
+
+![Landing Page Screen](https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop)
+![Dashboard Overview Screen](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop)
 
 ---
 

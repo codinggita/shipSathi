@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, CheckCircle, ArrowRight, Sparkles, Shield, Eye, EyeOff } from 'lucide-react';
 
@@ -10,6 +10,53 @@ const Login = () => {
   const [rememberMe, setRememberMe] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
   const [showGoogleModal, setShowGoogleModal] = useState(false);
+
+  useEffect(() => {
+    const initGoogleSignIn = () => {
+      const clientId = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+      if (clientId && window.google) {
+        window.google.accounts.id.initialize({
+          client_id: clientId,
+          callback: async (response) => {
+            setIsLoading(true);
+            const API_URL = import.meta.env.VITE_API_URL || 'https://shipsathi-db42.onrender.com';
+            try {
+              const res = await fetch(`${API_URL}/api/auth/google-login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ credential: response.credential })
+              });
+
+              const data = await res.json();
+              if (!res.ok) {
+                throw new Error(data.message || 'Google Auth failed.');
+              }
+
+              let userRole = data.user.email.toLowerCase().includes('enterprise') ? 'enterprise' : 'admin';
+              const userProfile = { ...data.user, role: userRole };
+
+              localStorage.setItem('authToken', data.token);
+              localStorage.setItem('userProfile', JSON.stringify(userProfile));
+
+              alert('Logged in successfully via Google!');
+              navigate('/dashboard');
+            } catch (err) {
+              alert(err.message);
+            } finally {
+              setIsLoading(false);
+            }
+          }
+        });
+
+        window.google.accounts.id.renderButton(
+          document.getElementById('googleSignInButton'),
+          { theme: 'outline', size: 'large', text: 'signin_with', width: '100%' }
+        );
+      }
+    };
+
+    initGoogleSignIn();
+  }, []);
 
   const handleGoogleLogin = async (selectedEmail) => {
     setIsLoading(true);
@@ -134,14 +181,18 @@ const Login = () => {
 
         {/* Social Auth row */}
         <div className="flex gap-2.5 mb-6 select-none">
-          <button 
-            type="button"
-            onClick={() => setShowGoogleModal(true)}
-            className="w-full flex items-center justify-center gap-2 border border-slate-200 hover:bg-slate-50 rounded-xl py-3.5 text-xs font-bold text-slate-700 transition-all shadow-sm bg-white"
-          >
-            <Sparkles className="h-4 w-4 text-amber-500" />
-            Sign in with Google
-          </button>
+          {import.meta.env.VITE_GOOGLE_CLIENT_ID ? (
+            <div id="googleSignInButton" className="w-full flex justify-center"></div>
+          ) : (
+            <button 
+              type="button"
+              onClick={() => setShowGoogleModal(true)}
+              className="w-full flex items-center justify-center gap-2 border border-slate-200 hover:bg-slate-50 rounded-xl py-3.5 text-xs font-bold text-slate-700 transition-all shadow-sm bg-white"
+            >
+              <Sparkles className="h-4 w-4 text-amber-500" />
+              Sign in with Google
+            </button>
+          )}
         </div>
 
         {/* separator line */}

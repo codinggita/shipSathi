@@ -3,7 +3,7 @@
 ## 🔗 Important Links
 * **Figma Link:** [Figma Design](https://www.figma.com/design/V4dFQRdvATMqSQMHiPK6qd/Untitled?node-id=305-8&t=PQorFTSV0mRWlbkF-1)
 * **Live Deployed Project Link:** [https://ship-sathi-scct.vercel.app/](https://ship-sathi-scct.vercel.app/)
-* **Postman Documentation Link:** [ducumentation](https://documenter.getpostman.com/view/50840965/2sBXqKofPG)
+* **Postman Documentation Link:** [documentation](https://documenter.getpostman.com/view/50840965/2sBXqKofPG)
 * **Backend Deployed Link:** [https://shipsathi-db42.onrender.com/](https://shipsathi-db42.onrender.com/)
 * **YouTube Demo Link:** [Add your YouTube video link here]
 

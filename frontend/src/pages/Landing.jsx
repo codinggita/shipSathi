@@ -6,7 +6,7 @@ import { Check, ArrowRight, Zap, Brain, LayoutGrid, BarChart3, Calculator } from
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import DashboardPreview from '../components/DashboardPreview';
-import SEO from '../components/SEO';
+import SEO from '../components/MetaSEO';
 
 const Landing = () => {
   const navigate = useNavigate();

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   MapPin, Truck, Box, CreditCard, CheckCircle, Info, 
   ChevronRight, ArrowRight, ShieldCheck, HelpCircle, Layers, 
@@ -13,6 +13,24 @@ const CreateShipment = () => {
   const [step, setStep] = useState(1);
   const [paymentType, setPaymentType] = useState('prepaid');
   const [termsAccepted, setTermsAccepted] = useState(true);
+  const [couriers, setCouriers] = useState([]);
+  const [selectedCourier, setSelectedCourier] = useState(null);
+
+  useEffect(() => {
+    const fetchCouriers = async () => {
+      try {
+        const res = await fetch('http://localhost:5000/api/couriers');
+        if (res.ok) {
+          const data = await res.json();
+          setCouriers(data);
+          if (data.length > 0) setSelectedCourier(data[0]);
+        }
+      } catch (err) {
+        console.error('Error fetching couriers:', err);
+      }
+    };
+    fetchCouriers();
+  }, []);
 
   const handleCopy = () => {
     navigator.clipboard.writeText('SHP-8921-X9');
@@ -277,29 +295,46 @@ const CreateShipment = () => {
                   {/* Selected Courier Card */}
                   <div className="bg-white p-6 rounded-2xl border border-slate-100 shadow-sm flex flex-col justify-between border-t-4 border-t-brand relative">
                     <div className="flex justify-between items-center mb-6">
-                      <span className="text-[10px] font-black tracking-wider uppercase text-slate-400 select-none">Selected Courier</span>
+                      <span className="text-[10px] font-black tracking-wider uppercase text-slate-400 select-none">Select Courier Partner</span>
                       <span className="px-2 py-0.5 bg-emerald-50 text-emerald-600 text-[10px] font-bold rounded-lg border border-emerald-100 flex items-center gap-1">
-                        <CheckCircle className="h-3 w-3" /> Best Value
+                        <CheckCircle className="h-3 w-3" /> Real-time Rates
                       </span>
                     </div>
 
-                    <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
-                      <div className="flex items-center gap-4">
-                        <div className="h-14 w-14 bg-slate-900 rounded-xl flex items-center justify-center shrink-0 border border-slate-800 font-extrabold text-xs text-white uppercase tracking-wider select-none text-center leading-none p-1">
-                          Courier
+                    <div className="flex flex-col gap-4">
+                      {couriers && couriers.length > 0 ? (
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                          {couriers.map(c => (
+                            <div 
+                              key={c.id}
+                              onClick={() => setSelectedCourier(c)}
+                              className={`p-4 rounded-xl border-2 flex items-center gap-3 cursor-pointer transition-all ${selectedCourier?.id === c.id ? 'border-brand bg-brand/5' : 'border-slate-100 hover:border-slate-200'}`}
+                            >
+                              <div className="h-10 w-10 bg-slate-100 rounded-xl flex items-center justify-center font-extrabold text-xs text-slate-600 tracking-wider">
+                                {c.name.substring(0, 2).toUpperCase()}
+                              </div>
+                              <div className="flex flex-col">
+                                <span className="text-sm font-extrabold text-slate-900 tracking-tight">{c.name}</span>
+                                <span className="text-[10px] font-bold text-emerald-600 mt-0.5">{c.status} • {c.latency}</span>
+                              </div>
+                            </div>
+                          ))}
                         </div>
-                        <div className="flex flex-col leading-tight">
-                          <span className="text-lg lg:text-xl font-extrabold text-slate-900 tracking-tight">FastTrack Express</span>
-                          <span className="text-xs font-bold text-slate-400 mt-1 flex items-center gap-1">
-                            Premium Air Freight <span className="text-slate-300">•</span> <Star className="h-3 w-3 fill-amber-400 text-amber-400" /> 4.9/5.0
-                          </span>
+                      ) : (
+                        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                          <div className="flex items-center gap-4">
+                            <div className="h-14 w-14 bg-slate-900 rounded-xl flex items-center justify-center shrink-0 border border-slate-800 font-extrabold text-xs text-white uppercase tracking-wider select-none text-center leading-none p-1">
+                              Courier
+                            </div>
+                            <div className="flex flex-col leading-tight">
+                              <span className="text-lg lg:text-xl font-extrabold text-slate-900 tracking-tight">FastTrack Express</span>
+                              <span className="text-xs font-bold text-slate-400 mt-1 flex items-center gap-1">
+                                Premium Air Freight <span className="text-slate-300">•</span> <Star className="h-3 w-3 fill-amber-400 text-amber-400" /> 4.9/5.0
+                              </span>
+                            </div>
+                          </div>
                         </div>
-                      </div>
-
-                      <div className="flex flex-col sm:text-right leading-tight">
-                        <span className="text-[9px] font-black uppercase text-slate-400 tracking-wider">Delivery Estimate</span>
-                        <span className="text-base lg:text-lg font-black text-brand mt-1">24 - 48 Hours</span>
-                      </div>
+                      )}
                     </div>
                   </div>
 
@@ -480,9 +515,11 @@ const CreateShipment = () => {
                       <span className="text-[10px] font-black tracking-wider uppercase text-slate-400 select-none">Courier Partner</span>
                       <div className="flex items-center gap-3.5 mt-2">
                         <div className="h-11 w-11 bg-slate-50 rounded-xl border border-slate-100 flex items-center justify-center text-xs font-extrabold tracking-widest text-slate-400 shrink-0 select-none">
-                          Courier
+                          {selectedCourier?.name ? selectedCourier.name.substring(0, 2).toUpperCase() : 'SP'}
                         </div>
-                        <span className="text-lg lg:text-xl font-extrabold text-slate-900 tracking-tight">ShipSathi Pro</span>
+                        <span className="text-lg lg:text-xl font-extrabold text-slate-900 tracking-tight">
+                          {selectedCourier?.name || 'ShipSathi Pro'}
+                        </span>
                       </div>
                     </div>
 

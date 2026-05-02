@@ -11,14 +11,44 @@ const Orders = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const [searchTerm, setSearchTerm] = useState('');
   const [statusFilter, setStatusFilter] = useState('All');
+  const [showAddForm, setShowAddForm] = useState(false);
+  const [newCustomer, setNewCustomer] = useState('');
+  const [newCourier, setNewCourier] = useState('Delhivery');
+  const [newWeight, setNewWeight] = useState('');
+  const [newAmount, setNewAmount] = useState('');
 
-  const ordersData = [
+  const [ordersData, setOrdersData] = useState([
     { id: '#ORD-2093', customer: 'John Doe', email: 'john@example.com', date: 'May 01, 2026', courier: 'Delhivery', weight: '1.2 kg', status: 'In Transit', amount: '$42.18' },
     { id: '#ORD-2092', customer: 'Sarah Smith', email: 'sarah@example.com', date: 'May 01, 2026', courier: 'Blue Dart', weight: '0.8 kg', status: 'Delivered', amount: '$31.50' },
     { id: '#ORD-2091', customer: 'Michael R.', email: 'michael@example.com', date: 'Apr 30, 2026', courier: 'DTDC', weight: '2.5 kg', status: 'Pending', amount: '$54.00' },
     { id: '#ORD-2090', customer: 'Emma Watson', email: 'emma@example.com', date: 'Apr 30, 2026', courier: 'Delhivery', weight: '0.5 kg', status: 'In Transit', amount: '$24.90' },
     { id: '#ORD-2089', customer: 'James Bond', email: 'james@example.com', date: 'Apr 29, 2026', courier: 'Blue Dart', weight: '5.0 kg', status: 'Delivered', amount: '$85.00' },
-  ];
+  ]);
+
+  const handleAddOrder = (e) => {
+    e.preventDefault();
+    if (!newCustomer || !newWeight || !newAmount) {
+      alert('Please fill out all order details.');
+      return;
+    }
+
+    const newOrder = {
+      id: `#ORD-${Math.floor(Math.random() * 9000) + 1000}`,
+      customer: newCustomer,
+      email: `${newCustomer.toLowerCase().replace(/\s+/g, '.')}@example.com`,
+      date: new Date().toLocaleDateString('en-US', { month: 'short', day: '2-digit', year: 'numeric' }),
+      courier: newCourier,
+      weight: `${newWeight} kg`,
+      status: 'Pending',
+      amount: `$${newAmount}`
+    };
+
+    setOrdersData([newOrder, ...ordersData]);
+    setNewCustomer('');
+    setNewWeight('');
+    setNewAmount('');
+    setShowAddForm(false);
+  };
 
   const filteredOrders = ordersData.filter(order => {
     const matchesSearch = order.customer.toLowerCase().includes(searchTerm.toLowerCase()) || order.id.toLowerCase().includes(searchTerm.toLowerCase());
@@ -41,11 +71,37 @@ const Orders = () => {
               <h1 className="text-2xl lg:text-3xl font-extrabold text-slate-900">Order Management</h1>
               <p className="text-sm text-slate-500 font-medium mt-1">Manage, filter, and track individual shipment manifests globally.</p>
             </div>
-            <button className="flex items-center justify-center gap-2 bg-brand px-5 py-2.5 rounded-xl text-sm font-bold text-white hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all">
+            <button 
+              onClick={() => setShowAddForm(!showAddForm)}
+              className="flex items-center justify-center gap-2 bg-brand px-5 py-2.5 rounded-xl text-sm font-bold text-white hover:bg-brand-dark shadow-lg shadow-brand/20 transition-all"
+            >
               <Plus className="h-4 w-4" />
-              Create New Order
+              {showAddForm ? 'Cancel' : 'Create New Order'}
             </button>
           </header>
+
+          {showAddForm && (
+            <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-sm mb-8">
+              <h3 className="text-lg font-bold text-slate-900 mb-4">Add a New Order</h3>
+              <form onSubmit={handleAddOrder} className="grid grid-cols-1 sm:grid-cols-4 gap-4 items-end">
+                <div>
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 block">Customer Name</label>
+                  <input type="text" value={newCustomer} onChange={(e) => setNewCustomer(e.target.value)} placeholder="e.g. Bob Vance" className="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brand w-full" />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 block">Weight (kg)</label>
+                  <input type="text" value={newWeight} onChange={(e) => setNewWeight(e.target.value)} placeholder="e.g. 1.5" className="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brand w-full" />
+                </div>
+                <div>
+                  <label className="text-[10px] font-bold text-slate-400 uppercase tracking-wider mb-1 block">Amount ($)</label>
+                  <input type="text" value={newAmount} onChange={(e) => setNewAmount(e.target.value)} placeholder="e.g. 45.00" className="bg-white border border-slate-200 rounded-xl px-4 py-2.5 text-sm outline-none focus:border-brand w-full" />
+                </div>
+                <button type="submit" className="bg-brand text-white hover:bg-brand-dark font-bold text-xs px-5 py-3 rounded-xl shadow transition-all h-11">
+                  Save Order
+                </button>
+              </form>
+            </div>
+          )}
 
           {/* Quick Stats Grid */}
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">

@@ -18,8 +18,9 @@ const CreateShipment = () => {
 
   useEffect(() => {
     const fetchCouriers = async () => {
+      const API_URL = import.meta.env.VITE_API_URL || 'https://shipsathi-db42.onrender.com';
       try {
-        const res = await fetch('http://localhost:5000/api/couriers');
+        const res = await fetch(`${API_URL}/api/couriers`);
         if (res.ok) {
           const data = await res.json();
           setCouriers(data);

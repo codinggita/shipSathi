@@ -13,8 +13,9 @@ const Couriers = () => {
   const [isSyncing, setIsSyncing] = useState(false);
 
   const fetchCouriers = async () => {
+    const API_URL = import.meta.env.VITE_API_URL || 'https://shipsathi-db42.onrender.com';
     try {
-      const response = await fetch('http://localhost:5000/api/couriers');
+      const response = await fetch(`${API_URL}/api/couriers`);
       if (response.ok) {
         const data = await response.json();
         setCouriers(data);
@@ -29,6 +30,7 @@ const Couriers = () => {
   }, []);
 
   const handleValidateConnect = async (e) => {
+    const API_URL = import.meta.env.VITE_API_URL || 'https://shipsathi-db42.onrender.com';
     e.preventDefault();
     if (!selectedCourier || !apiKey || !secretKey) {
       alert('Please fill out all the details.');
@@ -37,7 +39,7 @@ const Couriers = () => {
 
     setIsSyncing(true);
     try {
-      const response = await fetch('http://localhost:5000/api/couriers/validate', {
+      const response = await fetch(`${API_URL}/api/couriers/validate`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

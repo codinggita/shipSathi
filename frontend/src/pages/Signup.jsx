@@ -75,16 +75,15 @@ const Signup = () => {
         {/* Social signup row */}
         <div className="flex gap-2.5 mb-5 select-none">
           <button 
-            onClick={() => alert('Signing up with Google...')}
-            className="flex-1 flex items-center justify-center gap-2 border border-slate-200/80 hover:bg-slate-50 rounded-xl py-3 text-xs font-bold text-slate-600 transition-all shadow-sm bg-white"
+            type="button"
+            onClick={() => {
+              alert('Redirecting to Google Account Selection...');
+              navigate('/login');
+            }}
+            className="w-full flex items-center justify-center gap-2 border border-slate-200 hover:bg-slate-50 rounded-xl py-3.5 text-xs font-bold text-slate-700 transition-all shadow-sm bg-white"
           >
-            Google
-          </button>
-          <button 
-            onClick={() => alert('Signing up with Microsoft...')}
-            className="flex-1 flex items-center justify-center gap-2 border border-slate-200/80 hover:bg-slate-50 rounded-xl py-3 text-xs font-bold text-slate-600 transition-all shadow-sm bg-white"
-          >
-            Microsoft
+            <Sparkles className="h-4 w-4 text-amber-500" />
+            Sign up with Google
           </button>
         </div>
 

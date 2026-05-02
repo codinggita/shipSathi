@@ -6,6 +6,7 @@ import { Check, ArrowRight, Zap, Brain, LayoutGrid, BarChart3, Calculator } from
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
 import DashboardPreview from '../components/DashboardPreview';
+import SEO from '../components/SEO';
 
 const Landing = () => {
   const navigate = useNavigate();
@@ -22,6 +23,10 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 overflow-hidden">
+      <SEO 
+        title="Compare Rates in Seconds" 
+        description="ShipSathi is an enterprise-grade logistics and courier rate aggregator. Save on your shipping costs today." 
+      />
       <Navbar />
 
       {/* Hero Section */}

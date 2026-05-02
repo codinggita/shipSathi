@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, User, ArrowRight, CheckCircle, Sparkles, Eye, EyeOff } from 'lucide-react';
+import SEO from '../components/SEO';
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -103,6 +104,7 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 flex items-center justify-center p-4 sm:p-6 lg:p-8 font-sans">
+      <SEO title="Get Started" description="Create a new ShipSathi account today to compare courier rates and streamline your logistics." />
       <div className="w-full max-w-md bg-white p-6 md:p-8 rounded-2xl border border-slate-200/80 shadow-md flex flex-col justify-between">
         
         {/* Logo and header */}

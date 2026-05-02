@@ -5,12 +5,14 @@ import {
 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import DashboardHeader from '../components/DashboardHeader';
+import SEO from '../components/SEO';
 
 const Pricing = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   return (
     <div className="min-h-screen bg-slate-50 flex overflow-hidden text-slate-900 font-sans">
+      <SEO title="Pricing Rules" description="Set dynamic, automated pricing rules across local, regional, and national courier channels." />
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       <div className="flex-1 lg:ml-64 flex flex-col min-w-0 transition-all max-w-full">

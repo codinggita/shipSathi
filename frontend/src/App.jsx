@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import Landing from './pages/Landing';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
@@ -19,26 +19,34 @@ import Login from './pages/Login';
 import Signup from './pages/Signup';
 import ForgotPassword from './pages/ForgotPassword';
 
+const ProtectedRoute = ({ children }) => {
+  const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+  if (!token) {
+    return <Navigate to="/login" replace />;
+  }
+  return children;
+};
+
 function App() {
   return (
     <Router>
       <div className="App">
         <Routes>
           <Route path="/" element={<Landing />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/users" element={<Users />} />
-          <Route path="/couriers" element={<Couriers />} />
-          <Route path="/pricing" element={<Pricing />} />
-          <Route path="/settings" element={<Settings />} />
-          <Route path="/orders" element={<Orders />} />
-          <Route path="/analytics" element={<Analytics />} />
-          <Route path="/enterprise" element={<EnterpriseDashboard />} />
-          <Route path="/bulk-orders" element={<BulkOrders />} />
-          <Route path="/courier-performance" element={<CourierPerformance />} />
-          <Route path="/create-shipment" element={<CreateShipment />} />
-          <Route path="/rate-comparison" element={<RateComparison />} />
-          <Route path="/enterprise-analytics" element={<EnterpriseAnalytics />} />
-          <Route path="/enterprise-settings" element={<EnterpriseSettings />} />
+          <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
+          <Route path="/users" element={<ProtectedRoute><Users /></ProtectedRoute>} />
+          <Route path="/couriers" element={<ProtectedRoute><Couriers /></ProtectedRoute>} />
+          <Route path="/pricing" element={<ProtectedRoute><Pricing /></ProtectedRoute>} />
+          <Route path="/settings" element={<ProtectedRoute><Settings /></ProtectedRoute>} />
+          <Route path="/orders" element={<ProtectedRoute><Orders /></ProtectedRoute>} />
+          <Route path="/analytics" element={<ProtectedRoute><Analytics /></ProtectedRoute>} />
+          <Route path="/enterprise" element={<ProtectedRoute><EnterpriseDashboard /></ProtectedRoute>} />
+          <Route path="/bulk-orders" element={<ProtectedRoute><BulkOrders /></ProtectedRoute>} />
+          <Route path="/courier-performance" element={<ProtectedRoute><CourierPerformance /></ProtectedRoute>} />
+          <Route path="/create-shipment" element={<ProtectedRoute><CreateShipment /></ProtectedRoute>} />
+          <Route path="/rate-comparison" element={<ProtectedRoute><RateComparison /></ProtectedRoute>} />
+          <Route path="/enterprise-analytics" element={<ProtectedRoute><EnterpriseAnalytics /></ProtectedRoute>} />
+          <Route path="/enterprise-settings" element={<ProtectedRoute><EnterpriseSettings /></ProtectedRoute>} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/forgot-password" element={<ForgotPassword />} />
@@ -47,7 +55,5 @@ function App() {
     </Router>
   );
 }
-
-
 
 export default App;

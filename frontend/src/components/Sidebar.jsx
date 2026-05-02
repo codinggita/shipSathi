@@ -82,7 +82,14 @@ const Sidebar = ({ isOpen, onClose }) => {
             <HelpCircle className="h-5 w-5" />
             Support
           </button>
-          <button className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all">
+          <button 
+            onClick={() => {
+              localStorage.clear();
+              sessionStorage.clear();
+              navigate('/login');
+            }}
+            className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-sm font-medium text-slate-500 hover:bg-red-50 hover:text-red-600 transition-all cursor-pointer"
+          >
             <LogOut className="h-5 w-5" />
             Log Out
           </button>

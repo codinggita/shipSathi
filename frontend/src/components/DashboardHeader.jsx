@@ -37,8 +37,20 @@ const DashboardHeader = ({ onMenuClick }) => {
           
           <div className="flex items-center gap-3 cursor-pointer group">
             <div className="text-right hidden sm:flex flex-col">
-              <span className="text-sm font-bold text-slate-900 group-hover:text-brand transition-colors">Alex Rivera</span>
-              <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">Super Admin</span>
+              {(() => {
+                const userProfile = JSON.parse(localStorage.getItem('userProfile') || sessionStorage.getItem('userProfile') || '{}');
+                const isAdmin = userProfile?.role === 'admin' || (!userProfile?.role && userProfile?.email?.toLowerCase().includes('admin'));
+                return (
+                  <>
+                    <span className="text-sm font-bold text-slate-900 group-hover:text-brand transition-colors">
+                      {userProfile?.fullName || 'Alex Rivera'}
+                    </span>
+                    <span className="text-[10px] font-bold text-slate-400 uppercase tracking-widest leading-none">
+                      {isAdmin ? 'Super Admin' : 'Standard User'}
+                    </span>
+                  </>
+                );
+              })()}
             </div>
             <div className="h-9 w-9 lg:h-10 lg:w-10 rounded-full border-2 border-slate-100 overflow-hidden group-hover:border-brand/20 transition-all">
               <img src="https://i.pravatar.cc/150?u=alex" alt="Alex Rivera" className="h-full w-full object-cover" />

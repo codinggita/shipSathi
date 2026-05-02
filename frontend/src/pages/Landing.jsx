@@ -54,7 +54,7 @@ const Landing = () => {
                     if (token) {
                       navigate('/dashboard');
                     } else {
-                      navigate('/signup');
+                      navigate('/signup?from=free');
                     }
                   }}
                   className="btn-primary flex items-center justify-center gap-2 select-none cursor-pointer"

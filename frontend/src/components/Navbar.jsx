@@ -21,7 +21,19 @@ const Navbar = () => {
               Solutions <ChevronDown className="h-4 w-4" />
             </Link>
             <a href="#pricing" className="nav-link">Pricing</a>
-            <Link to="/enterprise" className="nav-link cursor-pointer hover:text-brand transition-colors">Enterprise</Link>
+            <Link 
+              to="/enterprise" 
+              onClick={(e) => {
+                const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+                if (!token) {
+                  e.preventDefault();
+                  navigate('/login?redirect=enterprise');
+                }
+              }}
+              className="nav-link cursor-pointer hover:text-brand transition-colors"
+            >
+              Enterprise
+            </Link>
           </div>
         </div>
 

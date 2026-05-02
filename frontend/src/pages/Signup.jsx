@@ -4,6 +4,8 @@ import { Mail, Lock, User, ArrowRight, CheckCircle, Sparkles, Eye, EyeOff } from
 
 const Signup = () => {
   const navigate = useNavigate();
+  const searchParams = new URLSearchParams(window.location.search);
+  const fromParam = searchParams.get('from');
   const [fullName, setFullName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -39,7 +41,11 @@ const Signup = () => {
       }
 
       alert('Account created successfully! Please log in.');
-      navigate('/login');
+      if (fromParam) {
+        navigate(`/login?from=${fromParam}`);
+      } else {
+        navigate('/login');
+      }
     } catch (error) {
       alert(error.message);
     } finally {
@@ -168,7 +174,7 @@ const Signup = () => {
         </form>
 
         <div className="text-center text-xs font-bold text-slate-400 select-none leading-none">
-          Already have an account? <span onClick={() => navigate('/login')} className="text-brand hover:underline cursor-pointer">Sign in</span>
+          Already have an account? <span onClick={() => navigate(fromParam ? `/login?from=${fromParam}` : '/login')} className="text-brand hover:underline cursor-pointer">Sign in</span>
         </div>
 
       </div>

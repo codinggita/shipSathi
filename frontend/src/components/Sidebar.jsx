@@ -40,7 +40,13 @@ const Sidebar = ({ isOpen, onClose }) => {
             <div className="flex h-8 w-8 items-center justify-center rounded-lg bg-brand text-white font-bold group-hover:bg-brand-dark transition-colors">S</div>
             <div className="flex flex-col leading-tight">
               <span className="text-lg font-bold text-brand group-hover:text-brand-dark transition-colors">ShipSathi</span>
-              <span className="text-[10px] font-medium text-slate-400">Admin Console</span>
+              <span className="text-[10px] font-medium text-slate-400">
+                {(() => {
+                  const userProfile = JSON.parse(localStorage.getItem('userProfile') || sessionStorage.getItem('userProfile') || '{}');
+                  const isAdmin = userProfile?.role === 'admin' || (!userProfile?.role && userProfile?.email?.toLowerCase().includes('admin'));
+                  return isAdmin ? 'Admin Console' : 'Customer Console';
+                })()}
+              </span>
             </div>
           </div>
           <button onClick={onClose} className="lg:hidden p-2 text-slate-400 hover:text-slate-900">

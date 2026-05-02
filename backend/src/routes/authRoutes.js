@@ -1,6 +1,6 @@
 import express from 'express';
 import jwt from 'jsonwebtoken';
-import { register, login, me } from '../controllers/authController.js';
+import { register, login, me, googleLogin } from '../controllers/authController.js';
 
 const router = express.Router();
 const JWT_SECRET = process.env.JWT_SECRET || 'supersecurejwtsecretshipsathipro';
@@ -24,6 +24,7 @@ const authenticateToken = (req, res, next) => {
 
 router.post('/register', register);
 router.post('/login', login);
+router.post('/google-login', googleLogin);
 router.get('/me', authenticateToken, me);
 
 export default router;

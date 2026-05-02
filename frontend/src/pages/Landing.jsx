@@ -23,9 +23,9 @@ const Landing = () => {
 
   return (
     <div className="min-h-screen bg-slate-50 overflow-hidden">
-      <SEO 
-        title="Compare Rates in Seconds" 
-        description="ShipSathi is an enterprise-grade logistics and courier rate aggregator. Save on your shipping costs today." 
+      <SEO
+        title="Compare Rates in Seconds"
+        description="ShipSathi is an enterprise-grade logistics and courier rate aggregator. Save on your shipping costs today."
       />
       <Navbar />
 
@@ -33,7 +33,7 @@ const Landing = () => {
       <section className="relative pt-20 pb-32 lg:pt-32 lg:pb-48">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
           <div className="grid grid-cols-1 items-center gap-16 lg:grid-cols-2">
-            
+
             {/* Hero Text */}
             <motion.div {...fadeInUp}>
               <div className="inline-flex items-center gap-2 rounded-full border border-primary-200 bg-primary-50/50 px-3 py-1 text-xs font-bold uppercase tracking-wider text-primary-600 mb-8">
@@ -43,17 +43,17 @@ const Landing = () => {
                 </span>
                 NEW: AI-OPTIMIZER V2.0
               </div>
-              
+
               <h1 className="text-5xl font-extrabold tracking-tight text-slate-900 sm:text-6xl mb-8 leading-tight">
                 Compare Courier Rates in <span className="gradient-text italic">Seconds</span>, Not Hours
               </h1>
-              
+
               <p className="text-lg text-slate-600 mb-10 max-w-xl leading-relaxed">
                 Streamline your logistics workflow with enterprise-grade aggregation. Save 15-25% on every shipment as our AI picks the most efficient courier for your specific route and timeline.
               </p>
-              
+
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
-                <button 
+                <button
                   onClick={() => {
                     const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
                     if (token) {
@@ -107,7 +107,7 @@ const Landing = () => {
             </p>
           </div>
 
-          <motion.div 
+          <motion.div
             variants={staggerContainer}
             initial="initial"
             whileInView="animate"
@@ -120,7 +120,7 @@ const Landing = () => {
               { icon: <LayoutGrid className="h-6 w-6" />, title: 'Bulk Processing', desc: 'Upload manifests and generate thousands of labels in a single click with automated workflows.', color: 'bg-blue-50 text-blue-600' },
               { icon: <BarChart3 className="h-6 w-6" />, title: 'Cost Analytics', desc: 'Deep dive into your shipping spend with visualization tools designed for CFO-level reporting.', color: 'bg-violet-50 text-violet-600' }
             ].map((feature, idx) => (
-              <motion.div 
+              <motion.div
                 key={idx}
                 variants={fadeInUp}
                 className="group p-8 rounded-2xl border border-slate-100 bg-white hover:border-brand/20 hover:shadow-premium transition-all"

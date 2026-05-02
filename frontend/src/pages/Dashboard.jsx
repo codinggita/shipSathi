@@ -7,7 +7,7 @@ import {
 import Sidebar from '../components/Sidebar';
 import DashboardHeader from '../components/DashboardHeader';
 import KPICard from '../components/KPICard';
-import SEO from '../components/SEO';
+import SEO from '../components/Seo';
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);

@@ -5,7 +5,7 @@ import {
 } from 'lucide-react';
 import Sidebar from '../components/Sidebar';
 import DashboardHeader from '../components/DashboardHeader';
-import SEO from '../components/SEO';
+import SEO from '../components/Seo';
 
 const Pricing = () => {
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Mail, Lock, CheckCircle, ArrowRight, Sparkles, Shield, Eye, EyeOff } from 'lucide-react';
-import SEO from '../components/SEO';
+import SEO from '../components/Seo';
 
 const Login = () => {
   const navigate = useNavigate();

@@ -93,8 +93,9 @@ ShipSathi/
 
 ## 📸 Project Screenshots / Images
 
-![Landing Page Screen](https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?q=80&w=1200&auto=format&fit=crop)
-![Dashboard Overview Screen](https://images.unsplash.com/photo-1551288049-bebda4e38f71?q=80&w=1200&auto=format&fit=crop)
+![Screenshot 1](./frontend/public/assets/screenshot-1.png)
+![Screenshot 2](./frontend/public/assets/screenshot-2.png)
+![Screenshot 3](./frontend/public/assets/screenshot-3.png)
 
 ---
 

@@ -49,8 +49,15 @@ const Landing = () => {
               
               <div className="flex flex-col sm:flex-row gap-4 mb-12">
                 <button 
-                  onClick={() => navigate('/dashboard')}
-                  className="btn-primary flex items-center justify-center gap-2"
+                  onClick={() => {
+                    const token = localStorage.getItem('authToken') || sessionStorage.getItem('authToken');
+                    if (token) {
+                      navigate('/dashboard');
+                    } else {
+                      navigate('/signup');
+                    }
+                  }}
+                  className="btn-primary flex items-center justify-center gap-2 select-none cursor-pointer"
                 >
                   Get Started Free <ArrowRight className="h-4 w-4" />
                 </button>

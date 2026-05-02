@@ -7,12 +7,14 @@ import {
 import Sidebar from '../components/Sidebar';
 import DashboardHeader from '../components/DashboardHeader';
 import KPICard from '../components/KPICard';
+import SEO from '../components/MetaSEO';
 
 const Dashboard = () => {
   const [isSidebarOpen, setIsSidebarOpen] = React.useState(false);
 
   return (
     <div className="min-h-screen bg-slate-50 flex overflow-hidden">
+      <SEO title="Dashboard" description="Monitor live operational data, track shipments, and evaluate courier performance on your ShipSathi dashboard." />
       <Sidebar isOpen={isSidebarOpen} onClose={() => setIsSidebarOpen(false)} />
 
       <div className="flex-1 lg:ml-64 flex flex-col min-w-0 transition-all max-w-full">

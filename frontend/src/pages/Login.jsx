@@ -33,14 +33,19 @@ const Login = () => {
                 throw new Error(data.message || 'Google Auth failed.');
               }
 
-              let userRole = data.user.email.toLowerCase().includes('enterprise') ? 'enterprise' : 'admin';
+              let userRole = data.user.email.toLowerCase().includes('admin') ? 'admin' :
+                             data.user.email.toLowerCase().includes('enterprise') ? 'enterprise' : 'user';
               const userProfile = { ...data.user, role: userRole };
 
               localStorage.setItem('authToken', data.token);
               localStorage.setItem('userProfile', JSON.stringify(userProfile));
 
               alert('Logged in successfully via Google!');
-              navigate('/dashboard');
+              if (userRole === 'admin') {
+                navigate('/dashboard');
+              } else {
+                navigate('/enterprise');
+              }
             } catch (err) {
               alert(err.message);
             } finally {
@@ -76,13 +81,18 @@ const Login = () => {
         throw new Error(data.message || 'Google Auth failed.');
       }
 
-      let userRole = selectedEmail.toLowerCase().includes('enterprise') ? 'enterprise' : 'admin';
+      let userRole = selectedEmail.toLowerCase().includes('admin') ? 'admin' :
+                     selectedEmail.toLowerCase().includes('enterprise') ? 'enterprise' : 'user';
       const userProfile = { ...data.user, role: userRole };
 
       localStorage.setItem('authToken', data.token);
       localStorage.setItem('userProfile', JSON.stringify(userProfile));
 
-      navigate('/dashboard');
+      if (userRole === 'admin') {
+        navigate('/dashboard');
+      } else {
+        navigate('/enterprise');
+      }
     } catch (err) {
       alert(err.message);
     } finally {
@@ -146,14 +156,10 @@ const Login = () => {
       alert('Logged in successfully!');
       
       // Navigate to correct section
-      if (redirectParam === 'enterprise' || email.toLowerCase().includes('enterprise')) {
-        navigate('/enterprise');
-      } else if (fromParam === 'free') {
-        navigate('/dashboard');
-      } else if (email.toLowerCase().includes('admin')) {
+      if (userRole === 'admin') {
         navigate('/dashboard');
       } else {
-        navigate('/dashboard');
+        navigate('/enterprise');
       }
     } catch (error) {
       alert(error.message);
